@@ -4,78 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InitActivity"
-    android:background="#202732">
-
-
+    tools:context=".IniciarSeccionActivity">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="164dp"
         android:layout_height="115dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:src="@drawable/ic_user_svg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/EditTextEmail"
+        android:id="@+id/EditTextEmailIS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
+        android:backgroundTint="#33FFFF"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="@string/EditTextEmail"
+        android:text="@string/EditTextEmailIS"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        android:backgroundTint="#33FFFF"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/EditTextPassword"
+        android:id="@+id/EditTextPasswordIS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
+        android:backgroundTint="#33FFFF"
         android:ems="10"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:text="@string/EditTextPassword"
+        android:text="@string/EditTextPasswordIS"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTextEmail"
-        android:backgroundTint="#33FFFF"/>
+        app:layout_constraintTop_toBottomOf="@+id/EditTextEmailIS" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonIniciarSeccionIS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
-        android:text="Button"
+        android:background="@drawable/button_rounder"
+        android:text="@string/buttonIniciarSeccionIS"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTextPassword"
-        android:background="@drawable/button_rounder"/>
+        app:layout_constraintTop_toBottomOf="@+id/EditTextPasswordIS" />
 
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonRegistrarseIS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        android:text="Button"
+        android:background="@drawable/button_rounder"
+        android:onClick="MoverActividadRegistrar"
+        android:text="@string/buttonRegistrarseIS"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        android:background="@drawable/button_rounder"/>
+        app:layout_constraintTop_toBottomOf="@+id/buttonIniciarSeccionIS" />
 </androidx.constraintlayout.widget.ConstraintLayout>

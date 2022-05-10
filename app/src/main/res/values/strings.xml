@@ -1,7 +1,22 @@
 <resources>
     <string name="app_name">CiclismoApp</string>
-    <string name="EditTextEmail">Email</string>
-    <string name="EditTextPassword">Contraseña</string>
+    <!-- Iniciar Seccion -->
+    <string name="EditTextEmailIS">Correo Electronico</string>
+    <string name="EditTextPasswordIS">Contraseña</string>
+    <string name="buttonIniciarSeccionIS">Inciar Seccion</string>
+    <string name="buttonRegistrarseIS">Registrarse</string>
+
+    <!-- Registrarse -->
+    <string name="editTextEmailR">Correo Electronico</string>
+    <string name="editTextPasswordR">Contraseña</string>
+    <string name="editTextNameR">Nombre</string>
+    <string name="editTextTelfR">Numero Celular</string>
+    <string name="buttonRegistrarseR">Inciar Seccion</string>
+    <string name="buttonIniciarSeccionR">Registrarse</string>
+
+    <!-- Mapa -->
+    <string name="buttonInciarSeccionM">Volver Inicio Seccion</string>
+    <string name="buttonMostrarRutasM">Mostrar Rutas</string>
 
 
 </resources>
