@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CiclismoApp</string>
+    <string name="EditTextEmail">Email</string>
+    <string name="EditTextPassword">Contraseña</string>
+
+
 </resources>
