@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/drawable/button_rounder.xml" value="0.1" />
         <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/drawable/ic_user_svg.xml" value="0.2305" />
-        <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/layout/activity_init.xml" value="0.2" />
+        <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/layout/activity_init.xml" value="0.1" />
         <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/layout/activity_main.xml" value="0.225" />
       </map>
     </option>

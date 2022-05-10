@@ -7,17 +7,7 @@
     tools:context=".InitActivity"
     android:background="#202732">
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+
 
     <ImageView
         android:id="@+id/imageView"
@@ -42,7 +32,8 @@
         android:text="@string/EditTextEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:backgroundTint="#33FFFF"/>
 
     <EditText
         android:id="@+id/EditTextPassword"
@@ -57,7 +48,8 @@
         android:text="@string/EditTextPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTextEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/EditTextEmail"
+        android:backgroundTint="#33FFFF"/>
 
     <Button
         android:id="@+id/button"
@@ -70,5 +62,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/EditTextPassword"
+        android:background="@drawable/button_rounder"/>
+
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        android:background="@drawable/button_rounder"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
