@@ -1,7 +1,5 @@
 package com.example.ciclismoapp;
 
-import static java.lang.System.exit;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -136,6 +134,11 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void MoverActividadInciarSeccion(View view) {
         Intent InciarSeccion = new Intent(this, IniciarSeccionActivity.class);
         startActivity(InciarSeccion);
+    }
+
+    public void MoverActividadEditarPerfil(View view) {
+        Intent EditarPerfilActivity = new Intent(this, MostrarRutasActivity.class);
+        startActivity(EditarPerfilActivity);
     }
 
     // logica de permisos de usuario geolocalizacion

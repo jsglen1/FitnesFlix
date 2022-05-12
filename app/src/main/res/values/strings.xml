@@ -17,6 +17,17 @@
     <!-- Mapa -->
     <string name="buttonInciarSeccionM">Volver Inicio Seccion</string>
     <string name="buttonMostrarRutasM">Mostrar Rutas</string>
+    <string name="title_activity_editar_perfil">EditarPerfilActivity</string>
+
+    <!-- Mostrar Rutas -->
+    <string name="textViewTitleMR">Lista De Rutas</string>
+
+
+
+
+
+
+
 
 
 </resources>

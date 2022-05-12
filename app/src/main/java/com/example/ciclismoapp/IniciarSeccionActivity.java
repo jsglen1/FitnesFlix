@@ -18,4 +18,9 @@ public class IniciarSeccionActivity extends AppCompatActivity {
         Intent ActividadRegistrar = new Intent(this, RegistrarseActivity.class);
         startActivity(ActividadRegistrar);
     }
+
+    public void MoverActividadEditarPerfil(View view) {
+        Intent EditarPerfilActivity = new Intent(this, MostrarRutasActivity.class);
+        startActivity(EditarPerfilActivity);
+    }
 }
