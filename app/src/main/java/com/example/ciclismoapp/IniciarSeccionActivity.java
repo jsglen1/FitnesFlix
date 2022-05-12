@@ -14,8 +14,8 @@ public class IniciarSeccionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_iniciar_seccion);
     }
 
-    public void MoverActividadRegistrar(View view){
-        Intent ActividadRegistrar = new Intent(this,RegistrarseActivity.class);
+    public void MoverActividadRegistrar(View view) {
+        Intent ActividadRegistrar = new Intent(this, RegistrarseActivity.class);
         startActivity(ActividadRegistrar);
     }
 }

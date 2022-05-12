@@ -14,13 +14,13 @@ public class RegistrarseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registrarse);
     }
 
-    public void MoverActividadInciarSeccion(View view){
-        Intent InciarSeccion = new Intent(this,IniciarSeccionActivity.class);
+    public void MoverActividadInciarSeccion(View view) {
+        Intent InciarSeccion = new Intent(this, IniciarSeccionActivity.class);
         startActivity(InciarSeccion);
     }
 
-    public void MoverActividadMapa(View view){
-        Intent ActividadMapa = new Intent(this,MapaActivity.class);
+    public void MoverActividadMapa(View view) {
+        Intent ActividadMapa = new Intent(this, MapaActivity.class);
         startActivity(ActividadMapa);
     }
 }
