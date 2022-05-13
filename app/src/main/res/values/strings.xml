@@ -21,6 +21,7 @@
 
     <!-- Mostrar Rutas -->
     <string name="textViewTitleMR">Lista De Rutas</string>
+    <string name="buttonVolverMR">Volver Ubicacion Actual</string>
 
 
 
