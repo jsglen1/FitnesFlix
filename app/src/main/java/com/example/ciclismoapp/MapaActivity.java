@@ -10,6 +10,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,10 +25,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MapaActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationClickListener {
 
     private GoogleMap mMap;
+
+    private Button MostrarUbicacion;
+
 
     private static final int CodigoLocalizacionFine;
 
@@ -44,6 +51,19 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapa);
         assert mapFragment != null;
+
+        MostrarUbicacion  = findViewById(R.id.buttonMostrarUbicacionM);
+
+        MostrarUbicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                funcionUbicacionActual(mMap);
+            }
+        });
+
+
+
+
         mapFragment.getMapAsync(this);
         getLocalizacion();
     }
@@ -71,7 +91,42 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         crearMarcador();
         mMap.setOnMyLocationClickListener(this);
         EnableLocation();*/
-        funcionUbicacionActual(mMap);
+        //funcionUbicacionActual(mMap);
+        crearMarcadorDefault(mMap);
+        RutasMarcadaPoligonos(mMap);
+    }
+
+    private void RutasMarcadaPoligonos(@NonNull GoogleMap mMapa){
+        PolylineOptions polilinea = new PolylineOptions()
+                .add(new LatLng(11.225631, -74.188490))
+                .add(new LatLng(11.222990, -74.188072))
+                .add(new LatLng(11.224169, -74.184446))
+                .width(20f)
+                .color(ContextCompat.getColor(this,R.color.purple_200));
+
+        Polyline polyline = mMapa.addPolyline(polilinea);
+    }
+
+    private void crearMarcadorDefault(@NonNull GoogleMap mMapa) {
+        // Set the map coordinates to Kyoto Japan.
+        LatLng SantaMarta = new LatLng(11.233, -74.2);
+        // Set the map type to Hybrid.
+        //mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        // Add a marker on the map coordinates.
+        mMapa.addMarker(new MarkerOptions()
+                .position(SantaMarta)
+                .title("Santa Marta"));
+        // Move the camera to the map coordinates and zoom in closer.
+        mMapa.moveCamera(CameraUpdateFactory.newLatLng(SantaMarta));
+        mMapa.moveCamera(CameraUpdateFactory.zoomTo(15));
+        // Display traffic.
+        //mMap.setTrafficEnabled(true);
+
+        mMapa.animateCamera(
+                CameraUpdateFactory.newLatLngZoom(SantaMarta, 18f),
+                4000,
+                null
+        );
     }
 
     private void funcionUbicacionActual(@NonNull GoogleMap mMapa) {
@@ -99,7 +154,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 LatLng miUbicacion = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(miUbicacion).title("ubicacion actual"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(miUbicacion));
-                mMap.setTrafficEnabled(true);
+                //mMap.setTrafficEnabled(true);
                 CameraPosition cameraPosition = new CameraPosition.Builder()
                         .target(miUbicacion)
                         .zoom(18f)
@@ -108,7 +163,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                         .build();
                 mMap.animateCamera(
                         CameraUpdateFactory.newLatLngZoom(miUbicacion, 18f),
-                        4000,
+                        //4000,
                         null);
 
             }

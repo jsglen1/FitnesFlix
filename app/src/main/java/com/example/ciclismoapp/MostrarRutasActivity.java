@@ -33,10 +33,10 @@ public class MostrarRutasActivity extends AppCompatActivity {
         rutas.add("Ciudadela");
         rutas.add("parque Los Novios");
         rutas.add("La Unimag");
-        rutas.add("ruta 1");
-        rutas.add("ruta 2");
-        rutas.add("ruta 3");
-        rutas.add("ruta 4");
+        rutas.add("Palomino");
+        rutas.add("Cienega");
+        rutas.add("Rio frio");
+        rutas.add("Don jaca");
         rutas.add("ruta 5");
         rutas.add("ruta 6");
         rutas.add("ruta 7");

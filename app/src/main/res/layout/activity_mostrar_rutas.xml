@@ -7,6 +7,17 @@
     android:textAlignment="center"
     tools:context=".MostrarRutasActivity">
 
+    <ImageView
+        android:id="@+id/imageViewMR"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textViewTitleMR"
         android:layout_width="match_parent"

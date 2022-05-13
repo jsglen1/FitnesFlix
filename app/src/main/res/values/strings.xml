@@ -18,6 +18,7 @@
     <string name="buttonInciarSeccionM">Volver Inicio Seccion</string>
     <string name="buttonMostrarRutasM">Mostrar Rutas</string>
     <string name="title_activity_editar_perfil">EditarPerfilActivity</string>
+    <string name="buttonMostrarUbicacionM">Mostrar Ubicacion</string>
 
     <!-- Mostrar Rutas -->
     <string name="textViewTitleMR">Lista De Rutas</string>

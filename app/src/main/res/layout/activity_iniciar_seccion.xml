@@ -7,11 +7,12 @@
     tools:context=".IniciarSeccionActivity">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="164dp"
-        android:layout_height="115dp"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/ic_user_svg"
+        android:id="@+id/imageViewIS"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="#33FFFF"
         android:ems="10"
@@ -29,8 +30,9 @@
         android:minHeight="48dp"
         android:text="@string/EditTextEmailIS"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewIngresarIS" />
 
     <EditText
         android:id="@+id/EditTextPasswordIS"
@@ -77,4 +79,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonIniciarSeccionIS" />
+
+    <ImageView
+        android:id="@+id/imageViewIngresarIS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewIS"
+        app:srcCompat="@drawable/ingresarseccion" />
 </androidx.constraintlayout.widget.ConstraintLayout>

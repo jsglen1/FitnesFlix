@@ -3,13 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.194" />
         <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/drawable/button_rounder.xml" value="0.1" />
         <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/drawable/ic_fitnesflix.xml" value="0.133" />
         <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/drawable/ic_init_background.xml" value="0.16" />
         <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/drawable/ic_initimg.xml" value="0.2315" />
+        <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.194" />
         <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/drawable/ic_user_svg.xml" value="0.2305" />
         <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/layout/activity_editar_perfil.xml" value="0.18469431380932022" />
-        <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/layout/activity_iniciar_seccion.xml" value="0.17" />
+        <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/layout/activity_iniciar_seccion.xml" value="0.18469431380932022" />
         <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/layout/activity_init.xml" value="0.22" />
         <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/USUARIO/AndroidStudioProjects/CiclismoApp/app/src/main/res/layout/activity_main.xml" value="0.225" />
