@@ -9,8 +9,8 @@
     <!-- Registrarse -->
     <string name="editTextEmailR">Correo Electronico</string>
     <string name="editTextPasswordR">Contraseña</string>
-    <string name="editTextNameR">Nombre</string>
-    <string name="editTextTelfR">Numero Celular</string>
+    <string name="editTextTelfR">Nombre</string>
+    <string name="editTextNameR">Numero Celular</string>
     <string name="buttonRegistrarseR">Inciar Seccion</string>
     <string name="buttonIniciarSeccionR">Registrarse</string>
 
@@ -24,12 +24,13 @@
     <string name="textViewTitleMR">Lista De Rutas</string>
     <string name="buttonVolverMR">Volver Ubicacion Actual</string>
 
+    <!-- FITNET FLIX -->
+    <string name="buttonRegistrarseFF"> Volver Inicio Seccion</string>
 
-
-
-
-
-
+    <!-- Bienvenida -->
+    <string name="buttonComenzarBv">COMENZAR</string>
+    <string name="textViewBienvenidoB">Bienvenido</string>
+    <string name="textViewBienvenido2B">App para la gestion de rutas</string>
 
 
 </resources>

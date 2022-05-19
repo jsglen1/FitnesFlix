@@ -16,6 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
+            android:name=".BienvenidaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IniciarSeccionActivity"
+            android:exported="false" />
+        <activity
             android:name=".MostrarRutasActivity"
             android:exported="false" />
         <activity
@@ -25,7 +31,7 @@
             android:name=".RegistrarseActivity"
             android:exported="false" />
         <activity
-            android:name=".IniciarSeccionActivity"
+            android:name=".FitnetFlixActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
