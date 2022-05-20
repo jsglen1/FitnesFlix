@@ -49,7 +49,7 @@ public class MostrarRutasActivity extends AppCompatActivity {
         rutas.add("ruta 14");
         rutas.add("ruta 15");
 
-        ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,rutas);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, rutas);
 
         listView.setAdapter(adapter);
 
@@ -59,7 +59,6 @@ public class MostrarRutasActivity extends AppCompatActivity {
         Intent ActividadMapa = new Intent(this, MapaActivity.class);
         startActivity(ActividadMapa);
     }
-
 
 
 }

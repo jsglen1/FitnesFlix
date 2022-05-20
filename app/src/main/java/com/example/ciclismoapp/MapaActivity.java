@@ -37,19 +37,13 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
 
-    //private Button MostrarUbicacion;
-
     private NavigationBarView BarraNavegacionAbajo;
-
-
 
     private static final int CodigoLocalizacionFine;
 
     static {
         CodigoLocalizacionFine = 1111;
     }
-
-
 
 
     @Override
@@ -66,42 +60,26 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         BarraNavegacionAbajo = findViewById(R.id.bottom_navigation);
 
 
-
         BarraNavegacionAbajo.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.locationNVM:
                         funcionUbicacionActual(mMap);
                         return true;
 
                     case R.id.routesNVM:
-                        Intent i = new Intent(MapaActivity.this,MostrarRutasActivity.class);
+                        Intent i = new Intent(MapaActivity.this, MostrarRutasActivity.class);
                         startActivity(i);
                         return true;
 
                     case R.id.homeNVM:
-                        Intent f = new Intent(MapaActivity.this,BienvenidaActivity.class);
+                        Intent f = new Intent(MapaActivity.this, BienvenidaActivity.class);
                         startActivity(f);
                 }
                 return false;
             }
         });
-
-
-
-
-       /*
-        MostrarUbicacion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                funcionUbicacionActual(mMap);
-            }
-        });
-
-        */
-
-
 
 
         mapFragment.getMapAsync(this);
@@ -127,22 +105,17 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
-        /*mMap = googleMap;
-        crearMarcador();
-        mMap.setOnMyLocationClickListener(this);
-        EnableLocation();*/
-        //funcionUbicacionActual(mMap);
         crearMarcadorDefault(mMap);
         RutasMarcadaPoligonos(mMap);
     }
 
-    private void RutasMarcadaPoligonos(@NonNull GoogleMap mMapa){
+    private void RutasMarcadaPoligonos(@NonNull GoogleMap mMapa) {
         PolylineOptions polilinea = new PolylineOptions()
                 .add(new LatLng(11.225631, -74.188490))
                 .add(new LatLng(11.222990, -74.188072))
                 .add(new LatLng(11.224169, -74.184446))
                 .width(20f)
-                .color(ContextCompat.getColor(this,R.color.purple_200));
+                .color(ContextCompat.getColor(this, R.color.purple_200));
 
         Polyline polyline = mMapa.addPolyline(polilinea);
     }
@@ -171,7 +144,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void funcionUbicacionActual(@NonNull GoogleMap mMapa) {
         mMap = mMapa;
-       // mMap = googleMap;
+        // mMap = googleMap;
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -231,20 +204,16 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         startActivity(InciarSeccion);
     }
 
-    public void MoverActividadComenzar(View view){
-        Intent I = new Intent(this,BienvenidaActivity.class);
+    public void MoverActividadComenzar(View view) {
+        Intent I = new Intent(this, BienvenidaActivity.class);
         startActivity(I);
     }
-
 
 
     public void MoverActividadEditarPerfil(View view) {
         Intent EditarPerfilActivity = new Intent(this, MostrarRutasActivity.class);
         startActivity(EditarPerfilActivity);
     }
-
-
-
 
 
     @Override
@@ -275,9 +244,6 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMyLocationClick(@NonNull Location location) {
     }
-
-
-
 
 
 }

@@ -14,8 +14,8 @@ public class BienvenidaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bienvenida);
     }
 
-    public  void MoverInicioSeccion(View view){
-        Intent I = new Intent(this,IniciarSeccionActivity.class);
+    public void MoverInicioSeccion(View view) {
+        Intent I = new Intent(this, IniciarSeccionActivity.class);
         startActivity(I);
     }
 }

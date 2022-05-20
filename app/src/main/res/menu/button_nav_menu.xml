@@ -4,7 +4,7 @@
     <item
         android:id="@+id/homeNVM"
         android:icon="@drawable/ic_home"
-        android:title="@string/homeNVM"/>
+        android:title="@string/homeNVM" />
 
     <item
         android:id="@+id/perfilNVM"

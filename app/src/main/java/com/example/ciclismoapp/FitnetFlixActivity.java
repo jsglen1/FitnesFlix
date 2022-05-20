@@ -26,11 +26,9 @@ public class FitnetFlixActivity extends AppCompatActivity {
         }
     };
 
-
     private void cargando() {
         Timer tempos = new Timer();
-        tempos.schedule(tarea,3000);
+        tempos.schedule(tarea, 3000);
     }
-
 
 }
