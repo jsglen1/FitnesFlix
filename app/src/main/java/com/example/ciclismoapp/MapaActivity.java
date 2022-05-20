@@ -9,6 +9,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -28,12 +30,17 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class MapaActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationClickListener {
 
     private GoogleMap mMap;
 
-    private Button MostrarUbicacion;
+    //private Button MostrarUbicacion;
+
+    private NavigationBarView BarraNavegacionAbajo;
+
 
 
     private static final int CodigoLocalizacionFine;
@@ -41,6 +48,8 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     static {
         CodigoLocalizacionFine = 1111;
     }
+
+
 
 
     @Override
@@ -52,14 +61,45 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.mapa);
         assert mapFragment != null;
 
-        MostrarUbicacion  = findViewById(R.id.buttonMostrarUbicacionM);
+        //MostrarUbicacion  = findViewById(R.id.buttonMostrarUbicacionM);
 
+        BarraNavegacionAbajo = findViewById(R.id.bottom_navigation);
+
+
+
+        BarraNavegacionAbajo.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.locationNVM:
+                        funcionUbicacionActual(mMap);
+                        return true;
+
+                    case R.id.routesNVM:
+                        Intent i = new Intent(MapaActivity.this,MostrarRutasActivity.class);
+                        startActivity(i);
+                        return true;
+
+                    case R.id.homeNVM:
+                        Intent f = new Intent(MapaActivity.this,BienvenidaActivity.class);
+                        startActivity(f);
+                }
+                return false;
+            }
+        });
+
+
+
+
+       /*
         MostrarUbicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 funcionUbicacionActual(mMap);
             }
         });
+
+        */
 
 
 
@@ -191,77 +231,20 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         startActivity(InciarSeccion);
     }
 
+    public void MoverActividadComenzar(View view){
+        Intent I = new Intent(this,BienvenidaActivity.class);
+        startActivity(I);
+    }
+
+
+
     public void MoverActividadEditarPerfil(View view) {
         Intent EditarPerfilActivity = new Intent(this, MostrarRutasActivity.class);
         startActivity(EditarPerfilActivity);
     }
 
-    // logica de permisos de usuario geolocalizacion
-
-    /*
-
-    private void crearMarcador() {
-        // Set the map coordinates to Kyoto Japan.
-        LatLng SantaMarta = new LatLng(11.233, -74.2);
-        // Set the map type to Hybrid.
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        // Add a marker on the map coordinates.
-        mMap.addMarker(new MarkerOptions()
-                .position(SantaMarta)
-                .title("Santa Marta"));
-        // Move the camera to the map coordinates and zoom in closer.
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(SantaMarta));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
-        // Display traffic.
-        mMap.setTrafficEnabled(true);
-
-        mMap.animateCamera(
-                CameraUpdateFactory.newLatLngZoom(SantaMarta, 18f),
-                4000,
-                null
-        );
-    }
 
 
-
-
-    private boolean isLocationPermissionGranted() {
-        return (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED);
-    }
-
-
-
-    private void EnableLocation() {
-        if (!mMap.isBuildingsEnabled()) {
-            Toast.makeText(this, "Error fatal!", Toast.LENGTH_SHORT).show();
-            //error
-            exit(-1);
-        }
-        if (isLocationPermissionGranted()) {
-            /*boolean enabled = true ;// ojo aqui = true
-            enabled  = mMap.isMyLocationEnabled();
-
-            Toast.makeText(this, "activado", Toast.LENGTH_SHORT).show();
-        } else {
-            RequestLocationPermission();
-            Toast.makeText(this, "Existencia", Toast.LENGTH_SHORT).show();
-        }
-    }
-    */
-
-    /*
-    private void RequestLocationPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-            // permisos denegados
-            Toast.makeText(this, "Acepta Los Permisos En Los Ajustes De La Aplicacion", Toast.LENGTH_SHORT).show();
-        } else {
-            // pregunta permisos incialmente
-            ActivityCompat.requestPermissions(this, new String[]{(Manifest.permission.ACCESS_FINE_LOCATION)}, CodigoLocalizacionFine);
-        }
-    }
-
-     */
 
 
     @Override
@@ -292,6 +275,9 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMyLocationClick(@NonNull Location location) {
     }
+
+
+
 
 
 }

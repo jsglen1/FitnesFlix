@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeNVM"
+        android:icon="@drawable/ic_home"
+        android:title="@string/homeNVM"/>
+
+    <item
+        android:id="@+id/perfilNVM"
+        android:icon="@drawable/ic_perfil"
+        android:title="@string/perfilNVM"/>
+
+    <item
+        android:id="@+id/placeholderNVM"
+        android:title="@string/placeholderNVM"/>
+
+    <item
+        android:id="@+id/locationNVM"
+        android:icon="@drawable/ic_location"
+        android:title="@string/locationNVM"/>
+
+    <item
+        android:id="@+id/routesNVM"
+        android:icon="@drawable/ic_routes"
+        android:title="@string/routesNVM"/>
+
+
+</menu>

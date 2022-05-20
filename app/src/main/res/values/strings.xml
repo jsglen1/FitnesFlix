@@ -32,5 +32,12 @@
     <string name="textViewBienvenidoB">Bienvenido</string>
     <string name="textViewBienvenido2B">App para la gestion de rutas</string>
 
+    <!-- button_nav_menu -->
+    <string name="homeNVM">Casa</string>
+    <string name="perfilNVM">Perfil</string>
+    <string name="locationNVM">Localizacion</string>
+    <string name="routesNVM">Rutas</string>
+    <string name="placeholderNVM"></string>
+
 
 </resources>
