@@ -31,10 +31,10 @@ public class MostrarRutasActivity extends AppCompatActivity {
 
         //12 rutas identificadores 0 - 11
         rutas.add("La Unimagdalena");
-        rutas.add("Rodadero");
-        rutas.add("Bahia");
-        rutas.add("Playa Blanca");
         rutas.add("Minca");
+        rutas.add("Bahia");
+        rutas.add("Rodadero");
+        rutas.add("Playa Blanca");
         rutas.add("Ciudadela");
         rutas.add("Parque Los Novios");
         rutas.add("Bonda");
@@ -52,7 +52,7 @@ public class MostrarRutasActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Toast.makeText(MostrarRutasActivity.this, "Has pulsado: " + rutas.get(position), Toast.LENGTH_LONG).show();
-                Toast.makeText(MostrarRutasActivity.this, "Pocision : " + position, Toast.LENGTH_LONG).show();
+               // Toast.makeText(MostrarRutasActivity.this, "Pocision : " + position, Toast.LENGTH_LONG).show();
 
                 //cambiar de vista ojo
                 Intent i = new Intent(MostrarRutasActivity.this, MapaActivity.class);

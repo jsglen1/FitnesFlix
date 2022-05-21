@@ -115,11 +115,11 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         String position = "";
         position = getIntent().getStringExtra("key");
-        Toast.makeText(this, "el dato pocision es" + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "el dato pocision es" + position, Toast.LENGTH_SHORT).show();
 
         if (position != null) {
             int pos = Integer.parseInt(position);
-            Toast.makeText(this, "mostrando localizacion de " + pos, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, "mostrando localizacion de " + pos, Toast.LENGTH_SHORT).show();
             CordenadasDeTodasLasRutas(pos, mMap);
         }
 
@@ -133,18 +133,50 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .add(new LatLng(11.225631, -74.188490))
                 .add(new LatLng(11.222990, -74.188072))
                 .add(new LatLng(11.224169, -74.184446))
-                .width(20f)
-                .color(ContextCompat.getColor(this, R.color.purple_200));
+                .width(10f)
+                .color(ContextCompat.getColor(this, R.color.purple_500));
+
+
+        PolylineOptions RutaMinca = new PolylineOptions()
+                .add(new LatLng(11.220088, -74.159417))
+                .add(new LatLng(11.203246, -74.161734))
+                .add(new LatLng(11.190616, -74.152593))
+                .add(new LatLng(11.177674, -74.147384))
+                .add(new LatLng(11.166365, -74.142685))
+                .add(new LatLng(11.157363, -74.134813))
+                .add(new LatLng(11.150904, -74.124031))
+                .add((new LatLng(11.144710, -74.119085)))
+                .width(10f)
+                .color(ContextCompat.getColor(this, R.color.purple_500));
+
+
+        PolylineOptions RutaBahia= new PolylineOptions()
+                .add(new LatLng(11.247504, -74.213773))
+                .add(new LatLng(11.245115, -74.214331))
+                .add(new LatLng(11.243189, -74.214975))
+                .add(new LatLng(11.241489, -74.215637))
+                .add(new LatLng(11.240280, -74.215845))
+                .add(new LatLng(11.240143, -74.216306))
+                .add(new LatLng(11.238796, -74.217014))
+                .add(new LatLng(11.237954, -74.217647))
+                .width(10f)
+                .color(ContextCompat.getColor(this, R.color.purple_500));
+
+
 
         ListaDeRutas = new ArrayList<>();
 
         ListaDeRutas.add(RutaUnimag);
+        ListaDeRutas.add(RutaMinca);
+        ListaDeRutas.add(RutaBahia);
 
         for (int i = 0; i < ListaDeRutas.size(); i++) {
             if (i == position) {
                 Polyline polyline = mMapa.addPolyline(ListaDeRutas.get(i));
             }
         }
+
+
 
     }
 
