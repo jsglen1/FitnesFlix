@@ -24,6 +24,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -34,6 +35,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MapaActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationClickListener {
 
@@ -43,6 +45,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //lista de rutas
     public ArrayList<PolylineOptions> ListaDeRutas;
+    public ArrayList<PolylineOptions> OrigenListaDeRutas;
 
     private static final int CodigoLocalizacionFine;
     private static final int CodigoRuta;
@@ -111,19 +114,46 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
-        crearMarcadorDefault(mMap);
+        //mMap.setTrafficEnabled(true);
 
         String position = "";
         position = getIntent().getStringExtra("key");
+
         //Toast.makeText(this, "el dato pocision es" + position, Toast.LENGTH_SHORT).show();
 
         if (position != null) {
             int pos = Integer.parseInt(position);
-          //  Toast.makeText(this, "mostrando localizacion de " + pos, Toast.LENGTH_SHORT).show();
+            //  Toast.makeText(this, "mostrando localizacion de " + pos, Toast.LENGTH_SHORT).show();
             CordenadasDeTodasLasRutas(pos, mMap);
+        } else {
+            //crearMarcadorDefault(mMap);
+            CordenadaSantaMartaInit(mMap);
+            //funcionUbicacionActual(mMap);
         }
-
     }
+
+    public void CordenadaSantaMartaInit(@NonNull GoogleMap mMapa){
+        LatLng SantaMarta = new LatLng(11.239634, -74.211125);
+        // Set the map type to Hybrid.
+        //mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        // Add a marker on the map coordinates.
+        mMapa.addMarker(new MarkerOptions()
+                .position(SantaMarta)
+                .title("Santa Marta")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+        // Move the camera to the map coordinates and zoom in closer.
+        mMapa.moveCamera(CameraUpdateFactory.newLatLng(SantaMarta));
+        mMapa.moveCamera(CameraUpdateFactory.zoomTo(15));
+        // Display traffic.
+        //mMap.setTrafficEnabled(true);
+
+        mMapa.animateCamera(
+                CameraUpdateFactory.newLatLngZoom(SantaMarta, 15f),
+                4000,
+                null
+        );
+    }
+
 
 
     //lista de todas las rutas
@@ -134,7 +164,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .add(new LatLng(11.222990, -74.188072))
                 .add(new LatLng(11.224169, -74.184446))
                 .width(10f)
-                .color(ContextCompat.getColor(this, R.color.purple_500));
+                .color(ContextCompat.getColor(this, R.color.MenuBarraColor));
 
 
         PolylineOptions RutaMinca = new PolylineOptions()
@@ -147,10 +177,10 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .add(new LatLng(11.150904, -74.124031))
                 .add((new LatLng(11.144710, -74.119085)))
                 .width(10f)
-                .color(ContextCompat.getColor(this, R.color.purple_500));
+                .color(ContextCompat.getColor(this, R.color.MenuBarraColor));
 
 
-        PolylineOptions RutaBahia= new PolylineOptions()
+        PolylineOptions RutaBahia = new PolylineOptions()
                 .add(new LatLng(11.247504, -74.213773))
                 .add(new LatLng(11.245115, -74.214331))
                 .add(new LatLng(11.243189, -74.214975))
@@ -160,46 +190,81 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .add(new LatLng(11.238796, -74.217014))
                 .add(new LatLng(11.237954, -74.217647))
                 .width(10f)
-                .color(ContextCompat.getColor(this, R.color.purple_500));
+                .color(ContextCompat.getColor(this, R.color.MenuBarraColor));
 
-
+        PolylineOptions RutaUnimagOrigen = new PolylineOptions()
+                .add(new LatLng(11.225631, -74.188490))
+                .width(10f)
+                .color(ContextCompat.getColor(this, R.color.teal_200));
 
         ListaDeRutas = new ArrayList<>();
+        OrigenListaDeRutas = new ArrayList<>();
 
         ListaDeRutas.add(RutaUnimag);
         ListaDeRutas.add(RutaMinca);
         ListaDeRutas.add(RutaBahia);
 
+        OrigenListaDeRutas.add(RutaUnimagOrigen);
+
         for (int i = 0; i < ListaDeRutas.size(); i++) {
             if (i == position) {
                 Polyline polyline = mMapa.addPolyline(ListaDeRutas.get(i));
+                crearMarcadorDefault(mMapa, ListaDeRutas.get(i));
             }
         }
 
 
-
     }
 
-    private void crearMarcadorDefault(@NonNull GoogleMap mMapa) {
+    private void crearMarcadorDefault(@NonNull GoogleMap mMapa, PolylineOptions ListCoords) {
         // Set the map coordinates to Kyoto Japan.
-        LatLng SantaMarta = new LatLng(11.233, -74.2);
+
+        List<LatLng> points = ListCoords.getPoints();
+
+        int IndexFinal = points.size() - 1;
+
+        //Toast.makeText(this, "ListCoords tam -> "+IndexFinal, Toast.LENGTH_SHORT).show();
+        // cordenadas de punto inicial
+        float latitudI = (float) points.get(0).latitude;
+        float longitudI = (float) points.get(0).longitude;
+
+        // cordenadas de punto final
+        float latitudF = (float) points.get(IndexFinal).latitude;
+        float longitudF = (float) points.get(IndexFinal).longitude;
+
+        //marcador inicial
+        LatLng SantaMartaI = new LatLng(latitudI, longitudI);
         // Set the map type to Hybrid.
         //mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         // Add a marker on the map coordinates.
         mMapa.addMarker(new MarkerOptions()
-                .position(SantaMarta)
-                .title("Santa Marta"));
+                .position(SantaMartaI)
+                .title("Punto Inicial")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
         // Move the camera to the map coordinates and zoom in closer.
-        mMapa.moveCamera(CameraUpdateFactory.newLatLng(SantaMarta));
+        mMapa.moveCamera(CameraUpdateFactory.newLatLng(SantaMartaI));
         mMapa.moveCamera(CameraUpdateFactory.zoomTo(15));
         // Display traffic.
         //mMap.setTrafficEnabled(true);
 
         mMapa.animateCamera(
-                CameraUpdateFactory.newLatLngZoom(SantaMarta, 18f),
+                CameraUpdateFactory.newLatLngZoom(SantaMartaI, 18f),
                 4000,
                 null
         );
+
+        // marcador final
+        LatLng SantaMartaF = new LatLng(latitudF, longitudF);
+        // Set the map type to Hybrid.
+        //mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        // Add a marker on the map coordinates.
+        mMapa.addMarker(new MarkerOptions()
+                .position(SantaMartaF)
+                .title("Punto Final")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+        // Move the camera to the map coordinates and zoom in closer.
+
+
     }
 
     private void funcionUbicacionActual(@NonNull GoogleMap mMapa) {
@@ -234,10 +299,10 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                         .bearing(90)
                         .tilt(45)
                         .build();
-                mMap.animateCamera(
-                        CameraUpdateFactory.newLatLngZoom(miUbicacion, 18f),
-                        //4000,
-                        null);
+                  /*mMap.animateCamera(
+                    CameraUpdateFactory.newLatLngZoom(miUbicacion,12f),
+                        3000,
+                  null); */
 
             }
 
