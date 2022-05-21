@@ -33,16 +33,23 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.ArrayList;
+
 public class MapaActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationClickListener {
 
     private GoogleMap mMap;
 
     private NavigationBarView BarraNavegacionAbajo;
 
+    //lista de rutas
+    public ArrayList<PolylineOptions> ListaDeRutas;
+
     private static final int CodigoLocalizacionFine;
+    private static final int CodigoRuta;
 
     static {
         CodigoLocalizacionFine = 1111;
+        CodigoRuta = 555;
     }
 
 
@@ -55,7 +62,6 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.mapa);
         assert mapFragment != null;
 
-        //MostrarUbicacion  = findViewById(R.id.buttonMostrarUbicacionM);
 
         BarraNavegacionAbajo = findViewById(R.id.bottom_navigation);
 
@@ -106,18 +112,40 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         crearMarcadorDefault(mMap);
-        RutasMarcadaPoligonos(mMap);
+
+        String position = "";
+        position = getIntent().getStringExtra("key");
+        Toast.makeText(this, "el dato pocision es" + position, Toast.LENGTH_SHORT).show();
+
+        if (position != null) {
+            int pos = Integer.parseInt(position);
+            Toast.makeText(this, "mostrando localizacion de " + pos, Toast.LENGTH_SHORT).show();
+            CordenadasDeTodasLasRutas(pos, mMap);
+        }
+
     }
 
-    private void RutasMarcadaPoligonos(@NonNull GoogleMap mMapa) {
-        PolylineOptions polilinea = new PolylineOptions()
+
+    //lista de todas las rutas
+    public void CordenadasDeTodasLasRutas(int position, @NonNull GoogleMap mMapa) {
+
+        PolylineOptions RutaUnimag = new PolylineOptions()
                 .add(new LatLng(11.225631, -74.188490))
                 .add(new LatLng(11.222990, -74.188072))
                 .add(new LatLng(11.224169, -74.184446))
                 .width(20f)
                 .color(ContextCompat.getColor(this, R.color.purple_200));
 
-        Polyline polyline = mMapa.addPolyline(polilinea);
+        ListaDeRutas = new ArrayList<>();
+
+        ListaDeRutas.add(RutaUnimag);
+
+        for (int i = 0; i < ListaDeRutas.size(); i++) {
+            if (i == position) {
+                Polyline polyline = mMapa.addPolyline(ListaDeRutas.get(i));
+            }
+        }
+
     }
 
     private void crearMarcadorDefault(@NonNull GoogleMap mMapa) {

@@ -5,17 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+
 public class MostrarRutasActivity extends AppCompatActivity {
 
-    private ListView listView;
+    public ListView listView;
 
-    private ArrayList<String> rutas;
+    public ArrayList<String> rutas;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,33 +29,39 @@ public class MostrarRutasActivity extends AppCompatActivity {
         listView = findViewById(R.id.ListViuwMR);
         rutas = new ArrayList<>();
 
-        rutas.add("Bonda");
+        //12 rutas identificadores 0 - 11
+        rutas.add("La Unimagdalena");
         rutas.add("Rodadero");
         rutas.add("Bahia");
         rutas.add("Playa Blanca");
         rutas.add("Minca");
         rutas.add("Ciudadela");
-        rutas.add("parque Los Novios");
-        rutas.add("La Unimag");
+        rutas.add("Parque Los Novios");
+        rutas.add("Bonda");
         rutas.add("Palomino");
         rutas.add("Cienega");
-        rutas.add("Rio frio");
-        rutas.add("Don jaca");
-        rutas.add("ruta 5");
-        rutas.add("ruta 6");
-        rutas.add("ruta 7");
-        rutas.add("ruta 8");
-        rutas.add("ruta 9");
-        rutas.add("ruta 10");
-        rutas.add("ruta 11");
-        rutas.add("ruta 12");
-        rutas.add("ruta 13");
-        rutas.add("ruta 14");
-        rutas.add("ruta 15");
+        rutas.add("Rio Frio");
+        rutas.add("Don Jaca");
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, rutas);
 
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Toast.makeText(MostrarRutasActivity.this, "Has pulsado: " + rutas.get(position), Toast.LENGTH_LONG).show();
+                Toast.makeText(MostrarRutasActivity.this, "Pocision : " + position, Toast.LENGTH_LONG).show();
+
+                //cambiar de vista ojo
+                Intent i = new Intent(MostrarRutasActivity.this, MapaActivity.class);
+                i.putExtra("key", position + "");
+                startActivity(i);
+
+            }
+        });
+
 
     }
 
