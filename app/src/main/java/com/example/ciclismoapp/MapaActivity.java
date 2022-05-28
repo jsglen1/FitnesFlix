@@ -9,6 +9,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,11 +17,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -54,10 +57,12 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private static final int CodigoLocalizacionFine;
     private static final int CodigoRuta;
+    private static final int Gps_rest_code;
 
     static {
         CodigoLocalizacionFine = 1111;
         CodigoRuta = 555;
+        Gps_rest_code = 777;
     }
 
 
@@ -80,7 +85,9 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 switch (item.getItemId()) {
                     case R.id.locationNVM:
                         //funcionUbicacionActual(mMap);
-                        GetCurrentLocation();
+                        if(isGpsEnable()){
+                            GetCurrentLocation();
+                        }
                         return true;
 
                     case R.id.routesNVM:
@@ -103,6 +110,27 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         mLocationClient = new FusedLocationProviderClient(this);
 
 
+    }
+
+    private boolean isGpsEnable(){
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        boolean provideEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        if(provideEnable){
+            return true;
+        }else{
+            AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    .setTitle("Gps Permisson")
+                    .setMessage("Gps es requerido para que la app funcione correctamente, por favor activar")
+                    .setPositiveButton("Si", (dialogInterface, which) -> {
+                                Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                startActivityForResult(i,Gps_rest_code);
+                            })
+                    .setCancelable(false)
+                    .show();
+        }
+        return false;
     }
 
     private void GetCurrentLocation() {
@@ -426,6 +454,26 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onMyLocationClick(@NonNull Location location) {
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode,int resultCode,@Nullable Intent data){
+            super.onActivityResult(requestCode,resultCode,data);
+
+            if(requestCode == Gps_rest_code){
+                LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+                boolean providerEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+                if(providerEnable){
+                    Toast.makeText(this,"GPS activado",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this,"GPS NO activado",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+
     }
 
 
