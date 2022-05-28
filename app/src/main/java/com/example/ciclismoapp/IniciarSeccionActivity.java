@@ -20,7 +20,9 @@ public class IniciarSeccionActivity extends AppCompatActivity {
     }
 
     public void MoverActividadEditarPerfil(View view) {
-        Intent EditarPerfilActivity = new Intent(this, FitnetFlixActivity.class);
+        Intent EditarPerfilActivity = new Intent(this, MapaActivity.class);
         startActivity(EditarPerfilActivity);
     }
+
+
 }

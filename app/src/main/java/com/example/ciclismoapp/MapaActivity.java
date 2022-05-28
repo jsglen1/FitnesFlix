@@ -20,10 +20,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.internal.ICameraUpdateFactoryDelegate;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -42,6 +45,8 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
 
     private NavigationBarView BarraNavegacionAbajo;
+
+    private FusedLocationProviderClient mLocationClient;
 
     //lista de rutas
     public ArrayList<PolylineOptions> ListaDeRutas;
@@ -74,7 +79,8 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.locationNVM:
-                        funcionUbicacionActual(mMap);
+                        //funcionUbicacionActual(mMap);
+                        GetCurrentLocation();
                         return true;
 
                     case R.id.routesNVM:
@@ -93,6 +99,46 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mapFragment.getMapAsync(this);
         getLocalizacion();
+
+        mLocationClient = new FusedLocationProviderClient(this);
+
+
+    }
+
+    private void GetCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mLocationClient.getLastLocation().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Location location = task.getResult();
+                gotoLocation(location.getLatitude(), location.getLongitude());
+            }
+        });
+
+    }
+
+    private void gotoLocation(double latitude, double longitude) {
+        LatLng latLng = new LatLng(latitude,longitude);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+        // Display traffic.
+        //mMap.setTrafficEnabled(true);
+
+        mMap.animateCamera(
+                CameraUpdateFactory.newLatLngZoom(latLng, 15f),
+                4000,
+                null
+        );
+
+
     }
 
     private void getLocalizacion() {
@@ -115,6 +161,17 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         //mMap.setTrafficEnabled(true);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
 
         String position = "";
         position = getIntent().getStringExtra("key");
@@ -137,10 +194,12 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Set the map type to Hybrid.
         //mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         // Add a marker on the map coordinates.
-        mMapa.addMarker(new MarkerOptions()
+       /* mMapa.addMarker(new MarkerOptions()
                 .position(SantaMarta)
                 .title("Santa Marta")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+
+        */
         // Move the camera to the map coordinates and zoom in closer.
         mMapa.moveCamera(CameraUpdateFactory.newLatLng(SantaMarta));
         mMapa.moveCamera(CameraUpdateFactory.zoomTo(15));
@@ -153,7 +212,6 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 null
         );
     }
-
 
 
     //lista de todas las rutas
