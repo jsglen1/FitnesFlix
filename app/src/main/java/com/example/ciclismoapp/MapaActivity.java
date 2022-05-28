@@ -85,7 +85,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 switch (item.getItemId()) {
                     case R.id.locationNVM:
                         //funcionUbicacionActual(mMap);
-                        if(isGpsEnable()){
+                        if (isGpsEnable()) {
                             GetCurrentLocation();
                         }
                         return true;
@@ -112,21 +112,21 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    private boolean isGpsEnable(){
+    private boolean isGpsEnable() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         boolean provideEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-        if(provideEnable){
+        if (provideEnable) {
             return true;
-        }else{
+        } else {
             AlertDialog alertDialog = new AlertDialog.Builder(this)
                     .setTitle("Gps Permisson")
                     .setMessage("Gps es requerido para que la app funcione correctamente, por favor activar")
                     .setPositiveButton("Si", (dialogInterface, which) -> {
-                                Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                startActivityForResult(i,Gps_rest_code);
-                            })
+                        Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivityForResult(i, Gps_rest_code);
+                    })
                     .setCancelable(false)
                     .show();
         }
@@ -154,7 +154,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void gotoLocation(double latitude, double longitude) {
-        LatLng latLng = new LatLng(latitude,longitude);
+        LatLng latLng = new LatLng(latitude, longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
         // Display traffic.
@@ -217,17 +217,9 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    public void CordenadaSantaMartaInit(@NonNull GoogleMap mMapa){
+    public void CordenadaSantaMartaInit(@NonNull GoogleMap mMapa) {
         LatLng SantaMarta = new LatLng(11.239634, -74.211125);
-        // Set the map type to Hybrid.
-        //mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        // Add a marker on the map coordinates.
-       /* mMapa.addMarker(new MarkerOptions()
-                .position(SantaMarta)
-                .title("Santa Marta")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
 
-        */
         // Move the camera to the map coordinates and zoom in closer.
         mMapa.moveCamera(CameraUpdateFactory.newLatLng(SantaMarta));
         mMapa.moveCamera(CameraUpdateFactory.zoomTo(15));
@@ -415,11 +407,6 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         startActivity(InciarSeccion);
     }
 
-    public void MoverActividadComenzar(View view) {
-        Intent I = new Intent(this, BienvenidaActivity.class);
-        startActivity(I);
-    }
-
 
     public void MoverActividadEditarPerfil(View view) {
         Intent EditarPerfilActivity = new Intent(this, MostrarRutasActivity.class);
@@ -457,24 +444,19 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @Override
-    protected void onActivityResult(int requestCode,int resultCode,@Nullable Intent data){
-            super.onActivityResult(requestCode,resultCode,data);
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-            if(requestCode == Gps_rest_code){
-                LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (requestCode == Gps_rest_code) {
+            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-                boolean providerEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            boolean providerEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-                if(providerEnable){
-                    Toast.makeText(this,"GPS activado",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(this,"GPS NO activado",Toast.LENGTH_SHORT).show();
-                }
-
+            if (providerEnable) {
+                Toast.makeText(this, "GPS activado", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "GPS NO activado", Toast.LENGTH_SHORT).show();
             }
-
-
+        }
     }
-
-
 }
