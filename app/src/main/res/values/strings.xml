@@ -39,5 +39,8 @@
     <string name="routesNVM">Rutas</string>
     <string name="placeholderNVM"></string>
 
+    <!-- Key API Google Mpas -->
+    <string name="KeyApiGoogleMaps">AIzaSyDZjWmDiE-IC5bZvS8YuqRuHQnIEbsllFM</string>
+
 
 </resources>

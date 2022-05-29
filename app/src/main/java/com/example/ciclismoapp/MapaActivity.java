@@ -1,7 +1,6 @@
 package com.example.ciclismoapp;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,34 +9,28 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.internal.ICameraUpdateFactoryDelegate;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
@@ -50,6 +43,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     private NavigationBarView BarraNavegacionAbajo;
 
     private FusedLocationProviderClient mLocationClient;
+
 
     //lista de rutas
     public ArrayList<PolylineOptions> ListaDeRutas;
@@ -74,6 +68,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapa);
         assert mapFragment != null;
+        mapFragment.getMapAsync(this); // puede omitir
 
 
         BarraNavegacionAbajo = findViewById(R.id.bottom_navigation);
@@ -111,6 +106,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     }
+
 
     private boolean isGpsEnable() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -459,4 +455,6 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         }
     }
+
+
 }
