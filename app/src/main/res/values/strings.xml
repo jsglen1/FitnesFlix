@@ -41,6 +41,14 @@
 
     <!-- Key API Google Mpas -->
     <string name="KeyApiGoogleMaps">AIzaSyDZjWmDiE-IC5bZvS8YuqRuHQnIEbsllFM</string>
+    <string name="APPkEY">AIzaSyDZjWmDiE-IC5bZvS8YuqRuHQnIEbsllFM</string>
+
+    <!-- scrow viue -->
+    <string name="dummy_text"> hola funciono</string>
+    <string name="ButomFragmentClose">Cerrar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="TitutloDetalleRuta">Titulo Ruta</string>
+    <string name="DescripcionRuta">Descripcion Ruta</string>
 
 
 </resources>

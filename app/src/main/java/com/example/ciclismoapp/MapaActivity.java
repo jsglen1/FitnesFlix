@@ -22,6 +22,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -31,6 +33,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ciclismoapp.fragments.InformacionFragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -40,6 +43,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -53,7 +57,8 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapaActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationClickListener {
+
+public class MapaActivity extends AppCompatActivity  implements OnMapReadyCallback, GoogleMap.OnMyLocationClickListener {
 
     private GoogleMap mMap;
 
@@ -129,9 +134,9 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
+
+
     private void direction() {
-
-
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = Uri.parse("https://maps.googleapis.com/maps/api/directions/json")
                 .buildUpon()
@@ -357,6 +362,37 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
             CordenadaSantaMartaInit(mMap);
             //funcionUbicacionActual(mMap);
         }
+
+        /*
+        MostrarRutasActivity mostrarRutasActivity = new MostrarRutasActivity();
+        String name = mostrarRutasActivity.rutas.get(Integer.parseInt(position));
+        Toast.makeText(getApplicationContext(),"has pulsado marcador"+name ,Toast.LENGTH_SHORT).show();
+         */
+
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                Toast.makeText(getApplicationContext(),"has pulsado marcador" ,Toast.LENGTH_SHORT).show();
+
+
+                // Create new fragment and transaction
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.setReorderingAllowed(true);
+
+                // Replace whatever is in the fragment_container view with this fragment
+                transaction.replace(R.id.FragmenTdetalles, InformacionFragment.newInstance("",""));
+
+                // Commit the transaction
+                transaction.commit();
+
+
+
+                return false;
+            }
+        });
+
     }
 
     public void CordenadaSantaMartaInit(@NonNull GoogleMap mMapa) {
