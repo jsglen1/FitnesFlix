@@ -118,7 +118,7 @@ public class MapaActivity extends AppCompatActivity  implements OnMapReadyCallba
                         return true;
 
                     case R.id.perfilNVM:
-                        direction();
+                        //direction();
                         return true;
                 }
                 return false;
@@ -136,12 +136,16 @@ public class MapaActivity extends AppCompatActivity  implements OnMapReadyCallba
 
 
 
-    private void direction() {
+    private void direction(float latI,float lonI,float latF,float lonF) {
+
+        String destino = ""+latF+","+lonF+"";
+        String origen = ""+latI+","+lonI+"";
+
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = Uri.parse("https://maps.googleapis.com/maps/api/directions/json")
                 .buildUpon()
-                .appendQueryParameter("destination", "11.247504,-74.213773") // la bahia
-                .appendQueryParameter("origin", "11.239634, -74.211125") // santa marta
+                .appendQueryParameter("destination", destino) // la bahia
+                .appendQueryParameter("origin", origen) // santa marta
                 .appendQueryParameter("mode", "driving")
                 .appendQueryParameter("key", "AIzaSyDZjWmDiE-IC5bZvS8YuqRuHQnIEbsllFM")
                 .toString();
@@ -185,12 +189,12 @@ public class MapaActivity extends AppCompatActivity  implements OnMapReadyCallba
                         }
 
                         mMap.addPolyline(polylineOptions);
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(11.247504, -74.211125)).title("market origenn"));
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(11.247504, -74.213773)).title("market destinon"));
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(latI, lonI)).title("market origenn"));
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(latF, lonF)).title("market destinon"));
 
                         LatLngBounds bounds = new LatLngBounds.Builder()
-                                .include(new LatLng(11.247504, -74.211125))
-                                .include(new LatLng(11.247504, -74.213773)).build();
+                                .include(new LatLng(latI, lonI))
+                                .include(new LatLng(latF, lonF)).build();
 
                         Point point = new Point();
                         getWindowManager().getDefaultDisplay().getSize(point);
@@ -487,6 +491,8 @@ public class MapaActivity extends AppCompatActivity  implements OnMapReadyCallba
         // cordenadas de punto final
         float latitudF = (float) points.get(IndexFinal).latitude;
         float longitudF = (float) points.get(IndexFinal).longitude;
+
+        direction(latitudI,longitudI,latitudF,longitudF);
 
         //marcador inicial
         LatLng SantaMartaI = new LatLng(latitudI, longitudI);
